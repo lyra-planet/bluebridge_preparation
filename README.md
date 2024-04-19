@@ -72,5 +72,43 @@ numpy.random.random_sample(size)
 numpy.random.choice(a, size, replace, p) 
 ```
 
+## Pandas
 
-
+```python
+# Series 是 Pandas 中最基本的一维数组形式。其可以储存整数、浮点数、字符串等类型的数据
+pandas.Series(data=None, index=None, dtype=None, name=None, copy=False, fastpath=False)
+# DataFrame 是 Pandas 中最基本的二维数据结构。其可以储存整数、浮点数、字符串等类型的数据
+pandas.DataFrame(data=None, index=None, columns=None, dtype=None, copy=False)
+# 读取 CSV 文件
+pandas.read_csv("https://labfile.oss.aliyuncs.com/courses/906/los_census.csv")
+# 转化为NumPy数组
+df.values
+# 可以基于数字索引对数据集进行选择。这里用到的 Pandas 中的 .iloc 方法。该方法可以接受的类型有：
+# 整数。例如：5
+# 整数构成的列表或数组。例如：[1, 2, 3]
+# 布尔数组。
+# 可返回索引值的函数或参数。
+df.iloc[:, 1:4]
+# 通过标签选择 df.loc[] 可以接受的类型有：
+# 单个标签。例如：2 或 'a'，这里的 2 指的是标签而不是索引位置。
+# 列表或数组包含的标签。例如：['A', 'B', 'C']。
+# 切片对象。例如：'A':'E'，注意这里和上面切片的不同之处，首尾都包含在内。
+# 布尔数组。
+# 可返回标签的函数或参数。
+df.loc[[0, 2], 'Median Age':]
+# DataFrame.drop 可以直接去掉数据集中指定的列和行。
+# 一般在使用时，我们指定 labels 标签参数，
+# 然后再通过 axis 指定按列或按行删除即可
+df.drop(labels=['Median Age', 'Total Males'], axis=1)
+# DataFrame.drop_duplicates 可以去掉数据集中的重复行
+DataFrame.drop_duplicates()
+# DataFrame.dropna 可以去掉数据集中的缺失值
+DataFrame.dropna(axis=0, how='any', thresh=None, subset=None, inplace=False)
+# DataFrame.isna
+DataFrame.isna()
+# DataFrame.fillna 可以填充数据集中的缺失值
+DataFrame.fillna(value=None, method=None, axis=None, inplace=False, limit=None, downcast=None)
+DataFrame.fillna(df.mean()['C':'E'])
+# 插值填充
+DataFrame.interpolate(method='linear', axis=0, limit=None, inplace=False, limit_direction=None, limit_area=None, downcast=None)
+```
