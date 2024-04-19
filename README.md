@@ -112,3 +112,26 @@ DataFrame.fillna(df.mean()['C':'E'])
 # 插值填充
 DataFrame.interpolate(method='linear', axis=0, limit=None, inplace=False, limit_direction=None, limit_area=None, downcast=None)
 ```
+
+## 线性回归预测实战 
+
+```python
+from sklearn.linear_model import LinearRegression
+import pandas as pd
+
+df = pd.read_csv('data.csv')
+df.head()
+features = df[['crim', 'rm', 'lstat']]
+features.describe()
+target = df['medv']  # 目标值数据
+split_num = int(len(features)*0.7)  # 得到 70% 位置
+X_train = features[:split_num]  # 训练集特征
+y_train = target[:split_num]  # 训练集目标
+X_test = features[split_num:]  # 测试集特征
+y_test = target[split_num:]  # 测试集目标
+model = LinearRegression()  # 建立模型
+model.fit(X_train, y_train)  # 训练模型
+model.coef_, model.intercept_  # 输出训练后的模型参数和截距项
+preds = model.predict(X_test)  # 输入测试集特征进行预测
+preds  # 预测结果
+```
